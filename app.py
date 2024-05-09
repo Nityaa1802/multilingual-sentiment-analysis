@@ -5,7 +5,7 @@ from nltk.corpus import stopwords
 
 nltk.download('stopwords')
 
-set(stopwords.words('english'))
+# set(stopwords.words('english'))
 
 app = Flask(__name__)
 
@@ -15,8 +15,7 @@ def my_form():
 
 @app.route('/', methods=['POST'])
 def my_form_post():
-    stop_words = stopwords.words('english')
-    
+
     #convert to lowercase
     text1 = request.form['text1'].lower()
     
@@ -26,7 +25,7 @@ def my_form_post():
     #text3 = ''.join(c for c in text2 if c not in punctuation)
         
     #remove stopwords    
-    processed_doc1 = ' '.join([word for word in text_final.split() if word not in stop_words])
+    processed_doc1 = ' '.join([word for word in text_final.split() if word not in stopwords.words('english')])
 
     sa = SentimentIntensityAnalyzer()
     dd = sa.polarity_scores(text=processed_doc1)
